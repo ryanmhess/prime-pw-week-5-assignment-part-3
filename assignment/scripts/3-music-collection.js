@@ -43,7 +43,7 @@ function startingPrompt(){
     //  If the prompt input is 'list' I want to console.log the current entrys                  --  incomplete
     else if(answer === 'list'){
         console.log('This is the list area:');
-        console.log(collection);
+        showCollection(collection);
     }   //  end else if for showing list
     //  If the prompt input is 'end' I want to terminate all process.                           --  WORKS
     else if(answer === 'end'){
@@ -74,9 +74,15 @@ function addToCollection(title, artist, yearPublished){
 
 //--------------------------------------------------------------------------------//
 
-function showCollection(){
+function showCollection(collection){
     //  I want this function to list out all album inputs from the addToCollection function
-
+    console.log(`Catalog List Includes ${collection.length} Entries:`);
+    for(let i=0; collection[i]=collection.length; i++){
+        console.log('** TEST **');
+        console.log(`${collection.title} by ${collection.artist}, published in ${collection.yearPublished}`);
+    }   //  end for loop
+    startingPrompt();
+    return '';
 }   //  end showCollection function
 
 //--------------------------------------------------------------------------------//
