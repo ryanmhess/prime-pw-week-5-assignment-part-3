@@ -8,17 +8,19 @@ let collection = [];
 let title;
 let artist;
 let yearPublished;
+let tracks = [];
 let counter = 1;
 
 ////////////////////////////////////////////////////////////////////////////////////
 //          Required Functions                                                    //
 ////////////////////////////////////////////////////////////////////////////////////
 
-function addToCollection(title, artist, yearPublished){
+function addToCollection(title, artist, yearPublished, tracks){
     let albumInputs = {
-        title,
-        artist,
-        yearPublished
+        title: title,
+        artist: artist,
+        yearPublished: yearPublished,
+        tracks: tracks
     }
     collection.push(albumInputs);
     return albumInputs;
@@ -56,7 +58,7 @@ function findByArtist(artist){  //  Searches for data sets by artist
 ////////////////////////////////////////////////////////////////////////////////////
 
 //  Adds data sets to the collection
-console.log(addToCollection('American Beauty', 'Grateful Dead', 1970));
+console.log(addToCollection('American Beauty', 'Grateful Dead', 1970, []));
 console.log(addToCollection('Terrapin Station', 'Grateful Dead', 1977));
 console.log(addToCollection('Abbey Road', 'The Beatles', 1969));
 console.log(addToCollection('Let It Be', 'The Beatles', 1970));
@@ -77,12 +79,25 @@ console.log(findByArtist('Phish'));
 yourChoice();   
 
 
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+//                                                                                //
+//          Stretch Goals                                                         //
+//                                                                                //
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+
+function search(){
+
+}   //  end search function
+
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 //                                                                                //
-//          Extra Special Functions & Stretch Goal Stuff                          //
+//          Extra Special Functions                                               //
 //                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
@@ -109,7 +124,7 @@ function yourChoice(){
         console.log('██║   ██║██╔══╝  ██║╚██╗██║██║██║   ██║╚════██║       ██╔╝  ████╔╝██║');
         console.log('╚██████╔╝███████╗██║ ╚████║██║╚██████╔╝███████║       ██║██╗╚██████╔╝');
         console.log(' ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚══════╝       ╚═╝╚═╝ ╚═════╝ ');
-        startingPromptExtra();
+        mainMenu();
     }   //  end else if - redirects to the extra stuff
     else{
         console.log('*** Invalid Entry ***');
@@ -119,62 +134,56 @@ function yourChoice(){
 
 //--------------------------------------------------------------------------------//
 
-function startingPromptExtra(){
-    //  I want this to prompt an input to add and entry, list all entrys or end the function
-    //  I would also like the prompt window to show the current catalog, but that is tricky
-    //  Scratch the catalog in prompt window idea, prompt window is limited size (with current knowledge set)
+function mainMenu(){
+    //  The main menu is where you can add data, search for data, or end the program
     let answer = prompt(`Catalog Genius 7.0\nInput For Desired Function:\n----------------------------\n[ addAlbum ] - To add entry to catalog.\n[ albums ] - To show catalog list.\n[ end ] - To close catalog program.`);
-    //  If the prompt input is 'add' I want to be redirected to the addToCollection
-    //  function where I can input the desired values for the growing object literal            --  I think it works..
-    if(answer === 'addAlbum'){
+    if(answer === 'addAlbum'){  //  lets you add a new album (title, artist, yearPublished)     --  WORKS
         console.log(' ');
-        console.log(addToCollectionExtra(title, artist, yearPublished));
+        console.log(addToCollectionAlbums(title, artist, yearPublished));
         return '';
-    }   //  end if  for adding to the catalog
-    //  If the prompt input is 'list' I want to console.log the current entrys                  --  WORKS
-    else if(answer === 'albums'){
+    }   //  end if for adding to the catalog
+    else if(answer === 'albums'){   //  shows a numbered list of all albums in the collection   --  WORKS
         console.log(' ');
-        showCollectionExtra(collection);
+        showCollectionAlbums(collection);
     }   //  end else if for showing list
-    //  If the prompt input is 'end' I want to terminate all process.                           --  WORKS
-    else if(answer === 'end'){
+    else if(answer === 'end'){  //  terminates the program                                      --  WORKS
         console.log(' ');
         console.log('*** Thank you for using Catalog Genius 7.0 ***');
         return '';
     }   // end else if for ending program
-    //  Basically any other inputs state invalid entry and restart the starting prompt          --  WORKS
-    else{
+    else{   //  lets you know if you entered anything other than a designated prompt            --  WORKS
         console.log('*** Invalid Entry ***');
-        startingPromptExtra();
+        mainMenu();
     }   //   end else for inputs not designated
 }   //  end startingPrompt function
 
 //--------------------------------------------------------------------------------//
 
-function addToCollectionExtra(title, artist, yearPublished){
+function addToCollectionAlbums(title, artist, yearPublished){
     let albumInputs = {
+        //  all of the prompt inputs together create a new album added to the collection        --  WORKS
         title: prompt('\nPlease Enter Album Title:\n'),
         artist: prompt('\nPlease Enter Album Artist:\n'),
         yearPublished: prompt('\nPlease Enter Album Year Published:\n')
     }   //  end albumInputs Object Literal
+    //  console log of the new album added to the collection
     console.log('New entry added to catalog:');
     console.log(`Album: ${albumInputs.title}\nArtist: ${albumInputs.artist}\nYear Published: ${albumInputs.yearPublished}\n`);
-    collection.push(albumInputs);
-    startingPromptExtra();
+    collection.push(albumInputs);   //  actually adds the album to the collection               --  WORKS
+    mainMenu();
     return '';
 }   //  end addToCollection function
 
 //--------------------------------------------------------------------------------//
 
-function showCollectionExtra(collection){
+function showCollectionAlbums(collection){
     //  I want this function to list out all album inputs from the addToCollection function
     console.log(`Catalog List Includes ${collection.length} Data Set(s):`);
     for(let i=0; i<collection.length; i++){
         console.log(`${i+1}. ${collection[i].title} by ${collection[i].artist}, published in ${collection[i].yearPublished}`);
     }   //  end for loop
-    startingPromptExtra();
+    mainMenu();
     return '';
 }   //  end showCollection function
 
 //--------------------------------------------------------------------------------//
-
