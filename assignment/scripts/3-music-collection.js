@@ -76,10 +76,10 @@ function addToCollection(title, artist, yearPublished){
 
 function showCollection(collection){
     //  I want this function to list out all album inputs from the addToCollection function
-    console.log(`Catalog List Includes ${collection.length} Entries:`);
-    for(let i=0; collection[i]=collection.length; i++){
+    console.log(`Catalog List Includes ${collection.length} Data Set(s):`);
+    for(let i=0; i<collection.length; i++){
         console.log('** TEST **');
-        console.log(`${collection.title} by ${collection.artist}, published in ${collection.yearPublished}`);
+        console.log(`${collection[i].title} by ${collection[i].artist}, published in ${collection[i].yearPublished}`);
     }   //  end for loop
     startingPrompt();
     return '';
