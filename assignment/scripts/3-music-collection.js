@@ -1,16 +1,4 @@
-console.log(' ██████╗ █████╗ ████████╗ █████╗ ██╗      ██████╗  ██████╗           ');
-console.log('██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║     ██╔═══██╗██╔════╝           ');
-console.log('██║     ███████║   ██║   ███████║██║     ██║   ██║██║  ███╗          ');
-console.log('██║     ██╔══██║   ██║   ██╔══██║██║     ██║   ██║██║   ██║          ');
-console.log('╚██████╗██║  ██║   ██║   ██║  ██║███████╗╚██████╔╝╚██████╔╝          ');
-console.log(' ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝           ');
-console.log('                                                                     ');
-console.log(' ██████╗ ███████╗███╗   ██╗██╗██╗   ██╗███████╗    ███████╗  ██████╗ ');
-console.log('██╔════╝ ██╔════╝████╗  ██║██║██║   ██║██╔════╝    ╚════██║ ██╔═████╗');
-console.log('██║  ███╗█████╗  ██╔██╗ ██║██║██║   ██║███████╗        ██╔╝ ██║██╔██║');
-console.log('██║   ██║██╔══╝  ██║╚██╗██║██║██║   ██║╚════██║       ██╔╝  ████╔╝██║');
-console.log('╚██████╔╝███████╗██║ ╚████║██║╚██████╔╝███████║       ██║██╗╚██████╔╝');
-console.log(' ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚══════╝       ╚═╝╚═╝ ╚═════╝ ');
+console.log('***** Music Collection *****');
 
 ////////////////////////////////////////////////////////////////////////////////////
 //          Global Variables                                                      //
@@ -20,26 +8,71 @@ let collection = [];
 let title;
 let artist;
 let yearPublished;
+let counter = 1;
 
 ////////////////////////////////////////////////////////////////////////////////////
 //          Basic Functions                                                       //
 ////////////////////////////////////////////////////////////////////////////////////
 
-function startingPrompt(){
+function addToCollection(title, artist, yearPublished){
+    let albumInputs = {
+        title,
+        artist,
+        yearPublished
+    }
+    collection.push(albumInputs);
+    return albumInputs;
+}   //  end addToCollection function
 
-}   //  end startingPrompt function
+function showCollection(array){
+    //  Produces a list of the album inputs created in addToCollection function
+    console.log('');
+    console.log(`Catalog List Includes ${array.length} Data Set(s):`);
+    for(let i=0; i<array.length; i++){
+        console.log(`${i+1}. ${array[i].title} by ${array[i].artist}, published in ${array[i].yearPublished}`);
+    }   //  end for loop
+    return '';
+}   //  end showCollection function
+
+function findByArtist(artist){  //  Searches for data sets by artist
+    let byArtist = [];
+    console.log(`Catalog Sets by ${artist}:`)
+    for(let i=0; i<collection.length; i++){
+        if(artist === collection[i].artist){
+            byArtist.push(collection[i]);
+            //console.log(`${counter}. ${collection[i].title} by ${collection[i].artist}, published in ${collection[i].yearPublished}`);
+            counter ++;
+        }   //  end if
+    }   //  end for loop
+    return byArtist;
+}   //  end findByArtist function
 
 ////////////////////////////////////////////////////////////////////////////////////
 //          Extra Special Functions                                               //
 ////////////////////////////////////////////////////////////////////////////////////
 
 function yourChoice(){
-    let choice = prompt(`Catalog Genius 7.0\n\nPlease Choose Program Path:\n----------------------------\n[ basic ] - Just the basics.\n[ extra ] - All the extra special.`);
-    if(choice === 'basic'){
-        startingPrompt();
+    let choice = prompt(`Catalog Genius 7.0\n\nPlease Choose Program Path:\n------------------------------\n[ end ] - For Required Features\n[ stretch ] - For Stretch Goals + Some`);
+    if(choice === 'end'){
+        console.log(' ');
+        console.log('*** Thank you for using Catalog Genius 7.0 ***');
         return '';
     }   //  end if - redirects to the basics
-    else if(choice === 'extra'){
+    else if(choice === 'stretch'){
+        console.clear();
+        console.log(' ██████╗ █████╗ ████████╗ █████╗ ██╗      ██████╗  ██████╗           ');
+        console.log('██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║     ██╔═══██╗██╔════╝           ');
+        console.log('██║     ███████║   ██║   ███████║██║     ██║   ██║██║  ███╗          ');
+        console.log('██║     ██╔══██║   ██║   ██╔══██║██║     ██║   ██║██║   ██║          ');
+        console.log('╚██████╗██║  ██║   ██║   ██║  ██║███████╗╚██████╔╝╚██████╔╝          ');
+        console.log(' ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝           ');
+        console.log('                                                                     ');
+        console.log(' ██████╗ ███████╗███╗   ██╗██╗██╗   ██╗███████╗    ███████╗  ██████╗ ');
+        console.log('██╔════╝ ██╔════╝████╗  ██║██║██║   ██║██╔════╝    ╚════██║ ██╔═████╗');
+        console.log('██║  ███╗█████╗  ██╔██╗ ██║██║██║   ██║███████╗        ██╔╝ ██║██╔██║');
+        console.log('██║   ██║██╔══╝  ██║╚██╗██║██║██║   ██║╚════██║       ██╔╝  ████╔╝██║');
+        console.log('╚██████╔╝███████╗██║ ╚████║██║╚██████╔╝███████║       ██║██╗╚██████╔╝');
+        console.log(' ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚══════╝       ╚═╝╚═╝ ╚═════╝ ');
         startingPromptExtra();
     }   //  end else if - redirects to the extra stuff
     else{
@@ -111,8 +144,19 @@ function showCollectionExtra(collection){
 //          Main Code                                                             //
 ////////////////////////////////////////////////////////////////////////////////////
 
-//  Previous entries to give it more substance
-
-
+//  Adds data sets to the collection
+console.log(addToCollection('American Beauty', 'Grateful Dead', 1970));
+console.log(addToCollection('Terrapin Station', 'Grateful Dead', 1977));
+console.log(addToCollection('Abbey Road', 'The Beatles', 1969));
+console.log(addToCollection('Let It Be', 'The Beatles', 1970));
+console.log(addToCollection('Shepherd Moons', 'Enya', 1991));
+console.log(addToCollection('The Long Black Veil', 'The Chieftains', 1995));
+console.log(addToCollection('The Purple Album', 'Lukas Graham', 2018));
+console.log(collection);
+//  Shows a listing of all data sets in the collection
+console.log(showCollection(collection));
+//  Shows a listing of all data sets by given artist
+console.log(findByArtist('The Beatles'));
+console.log(findByArtist('Phish'));
 
 yourChoice();
