@@ -11,7 +11,7 @@ let yearPublished;
 let counter = 1;
 
 ////////////////////////////////////////////////////////////////////////////////////
-//          Basic Functions                                                       //
+//          Required Functions                                                    //
 ////////////////////////////////////////////////////////////////////////////////////
 
 function addToCollection(title, artist, yearPublished){
@@ -24,6 +24,8 @@ function addToCollection(title, artist, yearPublished){
     return albumInputs;
 }   //  end addToCollection function
 
+//--------------------------------------------------------------------------------//
+
 function showCollection(array){
     //  Produces a list of the album inputs created in addToCollection function
     console.log('');
@@ -33,6 +35,8 @@ function showCollection(array){
     }   //  end for loop
     return '';
 }   //  end showCollection function
+
+//--------------------------------------------------------------------------------//
 
 function findByArtist(artist){  //  Searches for data sets by artist
     let byArtist = [];
@@ -48,7 +52,39 @@ function findByArtist(artist){  //  Searches for data sets by artist
 }   //  end findByArtist function
 
 ////////////////////////////////////////////////////////////////////////////////////
-//          Extra Special Functions                                               //
+//          Main Code                                                             //
+////////////////////////////////////////////////////////////////////////////////////
+
+//  Adds data sets to the collection
+console.log(addToCollection('American Beauty', 'Grateful Dead', 1970));
+console.log(addToCollection('Terrapin Station', 'Grateful Dead', 1977));
+console.log(addToCollection('Abbey Road', 'The Beatles', 1969));
+console.log(addToCollection('Let It Be', 'The Beatles', 1970));
+console.log(addToCollection('Shepherd Moons', 'Enya', 1991));
+console.log(addToCollection('The Long Black Veil', 'The Chieftains', 1995));
+console.log(addToCollection('The Purple Album', 'Lukas Graham', 2018));
+console.log(collection);
+
+//  Shows a listing of all data sets in the collection
+console.log(showCollection(collection));
+
+//  Shows a listing of all data sets by given artist
+console.log(findByArtist('The Beatles'));
+console.log(findByArtist('Phish'));
+
+//  yourChoice function Lets you see the outputs for the  
+//  Required Features or takes you to the extra special stuff
+yourChoice();   
+
+
+
+
+////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
+//                                                                                //
+//          Extra Special Functions & Stretch Goal Stuff                          //
+//                                                                                //
+////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
 function yourChoice(){
@@ -59,7 +95,7 @@ function yourChoice(){
         return '';
     }   //  end if - redirects to the basics
     else if(choice === 'stretch'){
-        console.clear();
+        console.clear();    //  Totally used an ASCII art generator for this -> https://patorjk.com/software/taag/
         console.log(' ██████╗ █████╗ ████████╗ █████╗ ██╗      ██████╗  ██████╗           ');
         console.log('██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║     ██╔═══██╗██╔════╝           ');
         console.log('██║     ███████║   ██║   ███████║██║     ██║   ██║██║  ███╗          ');
@@ -81,20 +117,22 @@ function yourChoice(){
     }   //  end else
 }   //  end yourChoice function
 
+//--------------------------------------------------------------------------------//
+
 function startingPromptExtra(){
     //  I want this to prompt an input to add and entry, list all entrys or end the function
     //  I would also like the prompt window to show the current catalog, but that is tricky
     //  Scratch the catalog in prompt window idea, prompt window is limited size (with current knowledge set)
-    let answer = prompt(`Catalog Genius 7.0\n\nInput For Desired Function:\n----------------------------\n[ add ] - To add entry to catalog.\n[ list ] - To show catalog list.\n[ end ] - To close catalog program.`);
+    let answer = prompt(`Catalog Genius 7.0\nInput For Desired Function:\n----------------------------\n[ addAlbum ] - To add entry to catalog.\n[ albums ] - To show catalog list.\n[ end ] - To close catalog program.`);
     //  If the prompt input is 'add' I want to be redirected to the addToCollection
     //  function where I can input the desired values for the growing object literal            --  I think it works..
-    if(answer === 'add'){
+    if(answer === 'addAlbum'){
         console.log(' ');
         console.log(addToCollectionExtra(title, artist, yearPublished));
         return '';
     }   //  end if  for adding to the catalog
-    //  If the prompt input is 'list' I want to console.log the current entrys                  --  incomplete
-    else if(answer === 'list'){
+    //  If the prompt input is 'list' I want to console.log the current entrys                  --  WORKS
+    else if(answer === 'albums'){
         console.log(' ');
         showCollectionExtra(collection);
     }   //  end else if for showing list
@@ -140,23 +178,3 @@ function showCollectionExtra(collection){
 
 //--------------------------------------------------------------------------------//
 
-////////////////////////////////////////////////////////////////////////////////////
-//          Main Code                                                             //
-////////////////////////////////////////////////////////////////////////////////////
-
-//  Adds data sets to the collection
-console.log(addToCollection('American Beauty', 'Grateful Dead', 1970));
-console.log(addToCollection('Terrapin Station', 'Grateful Dead', 1977));
-console.log(addToCollection('Abbey Road', 'The Beatles', 1969));
-console.log(addToCollection('Let It Be', 'The Beatles', 1970));
-console.log(addToCollection('Shepherd Moons', 'Enya', 1991));
-console.log(addToCollection('The Long Black Veil', 'The Chieftains', 1995));
-console.log(addToCollection('The Purple Album', 'Lukas Graham', 2018));
-console.log(collection);
-//  Shows a listing of all data sets in the collection
-console.log(showCollection(collection));
-//  Shows a listing of all data sets by given artist
-console.log(findByArtist('The Beatles'));
-console.log(findByArtist('Phish'));
-
-yourChoice();
