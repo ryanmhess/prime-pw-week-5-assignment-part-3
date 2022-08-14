@@ -12,6 +12,7 @@ let tracks = [];
 let track;
 let duration;
 let counter = 1;
+let numTracks;
 
 ////////////////////////////////////////////////////////////////////////////////////
 //          Required Functions                                                    //
@@ -104,6 +105,10 @@ function search(){
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
+//----------------------------------------------------------------------------------//
+//          Function to focus on required functions or stretch goals/extras         //
+//----------------------------------------------------------------------------------//
+
 function yourChoice(){
     let choice = prompt(`Catalog Genius 7.0\n\nPlease Choose Program Path:\n------------------------------\n[ end ] - For Required Features\n[ stretch ] - For Stretch Goals + Some`);
     if(choice === 'end'){
@@ -112,20 +117,8 @@ function yourChoice(){
         return '';
     }   //  end if - redirects to the basics
     else if(choice === 'stretch'){
-        console.clear();    //  Totally used an ASCII art generator for this -> https://patorjk.com/software/taag/
-        console.log(' ██████╗ █████╗ ████████╗ █████╗ ██╗      ██████╗  ██████╗           ');
-        console.log('██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║     ██╔═══██╗██╔════╝           ');
-        console.log('██║     ███████║   ██║   ███████║██║     ██║   ██║██║  ███╗          ');
-        console.log('██║     ██╔══██║   ██║   ██╔══██║██║     ██║   ██║██║   ██║          ');
-        console.log('╚██████╗██║  ██║   ██║   ██║  ██║███████╗╚██████╔╝╚██████╔╝          ');
-        console.log(' ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝           ');
-        console.log('                                                                     ');
-        console.log(' ██████╗ ███████╗███╗   ██╗██╗██╗   ██╗███████╗    ███████╗  ██████╗ ');
-        console.log('██╔════╝ ██╔════╝████╗  ██║██║██║   ██║██╔════╝    ╚════██║ ██╔═████╗');
-        console.log('██║  ███╗█████╗  ██╔██╗ ██║██║██║   ██║███████╗        ██╔╝ ██║██╔██║');
-        console.log('██║   ██║██╔══╝  ██║╚██╗██║██║██║   ██║╚════██║       ██╔╝  ████╔╝██║');
-        console.log('╚██████╔╝███████╗██║ ╚████║██║╚██████╔╝███████║       ██║██╗╚██████╔╝');
-        console.log(' ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚══════╝       ╚═╝╚═╝ ╚═════╝ ');
+        console.clear();
+        fancyName();
         mainMenu();
     }   //  end else if - redirects to the extra stuff
     else{
@@ -134,27 +127,30 @@ function yourChoice(){
     }   //  end else
 }   //  end yourChoice function
 
-//--------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+//          Function to serve as main menu for selecting other functions            //
+//----------------------------------------------------------------------------------//
 
 function mainMenu(){
     //  The main menu is where you can add data, search for data, or end the program
-    let answer = prompt(`Catalog Genius 7.0\nInput For Desired Function:\n----------------------------\n[ addAlbum ] - To add entry to catalog.\n[ albums ] - To show catalog list.\n[ tracks ] - To show catalog list with tracks.\n[ end ] - To close catalog program.`);
-    if(answer === 'addAlbum'){  //  lets you add a new album (title, artist, yearPublished)     --  WORKS
+    let answer = prompt(`Catalog Genius 7.0\nInput For Desired Function:\n----------------------------\n[ add album ] - To add a new album.\n[ album list ] - To show a list of albums.\n[ album tracks ] - To show a list of albums with tracks.\n[ end ] - To close catalog program.`);
+    if(answer === 'add album'){  //  lets you add a new album (title, artist, yearPublished)     --  WORKS
         console.log(' ');
         console.log(addToCollectionAlbums(title, artist, yearPublished));
         return '';
     }   //  end if for adding to the catalog
-    else if(answer === 'albums'){   //  shows a numbered list of all albums in the collection   --  WORKS
+    else if(answer === 'album list'){   //  shows a numbered list of all albums in the collection   --  WORKS
         console.log(' ');
         showCollectionAlbums(collection);
     }   //  end else if for showing list
-    else if(answer === 'tracks'){   //  shows a numbered list of all albums in the collection   --  WORKS
+    else if(answer === 'album tracks'){   //  shows a numbered list of all albums in the collection   --  WORKS
         console.log(' ');
         showCollectionTracks(collection, tracks);
     }   //  end else if for showing list
     else if(answer === 'end'){  //  terminates the program                                      --  WORKS
         console.log(' ');
-        console.log('*** Thank you for using Catalog Genius 7.0 ***');
+        console.log('*** Thank you for using ***');
+        fancyName();
         return '';
     }   // end else if for ending program
     else{   //  lets you know if you entered anything other than a designated prompt            --  WORKS
@@ -164,20 +160,43 @@ function mainMenu(){
 }   //  end startingPrompt function
 
 //----------------------------------------------------------------------------------//
+//          Function to add albums                                                  //
+//----------------------------------------------------------------------------------//
 
-function addToCollectionAlbums(title, artist, yearPublished){
+function addToCollectionAlbums(title, artist, yearPublished, tracks){
     let albumInputs = {                                                             //  all of the prompt inputs together create a new album added to the collection        --  WORKS
         title: prompt('\nPlease Enter Album Title:\n'),
         artist: prompt('\nPlease Enter Album Artist:\n'),
-        yearPublished: prompt('\nPlease Enter Album Year Published:\n')
+        yearPublished: prompt('\nPlease Enter Album Year Published:\n'),
+        tracks: trackInsert()
     }   //  end albumInputs Object Literal
     console.log('New entry added to catalog:');                                     //  console log of the new album added to the collection
-    console.log(`Album: ${albumInputs.title}\nArtist: ${albumInputs.artist}\nYear Published: ${albumInputs.yearPublished}\n`);
+    console.log(`Album: ${albumInputs.title}\nArtist: ${albumInputs.artist}\nYear Published: ${albumInputs.yearPublished}\nNumber of Tracks: ${numTracks}`);
+    console.log(`${albumInputs.tracks}`);
     collection.push(albumInputs);                                                   //  actually adds the album to the collection               --  WORKS
     mainMenu();
-    return '';
+    return albumInputs;
 }   //  end addToCollection function
 
+////////////////////////////////////  ----    WORK ZONE   ----    ////////////////////////////////////
+function trackInsert(){   
+    numTracks = prompt('\nHow many tracks does this album have?\n')
+    tracks = [];
+    for(let i=0; i<numTracks; i++){
+        tracks.push([{track: prompt(`Please Enter Track ${i+1} Name:\n`), duration: prompt(`Please Enter Track ${i+1} Duration:\n`)}]);
+    }   //  end for loop
+    console.log(tracks) //  currently writing:  [object Object],[object Object] 
+    return tracks;
+}   //  end of trackInsert funcion
+
+//  When I run my Album + Track list function I shows the newly added album with correct # of tracks, but tracks show 
+//  as undefined: undefined versus the wanted 'track': 'duration'  ..  getting there though.. 
+
+////////////////////////////////////  ----    WORK ZONE   ----    ////////////////////////////////////  [{track: 'Box of Rain', duration: '5:19'},
+
+
+//----------------------------------------------------------------------------------//
+//          Function to show a list of albums                                       //
 //----------------------------------------------------------------------------------//
 
 function showCollectionAlbums(collection){
@@ -185,19 +204,21 @@ function showCollectionAlbums(collection){
     console.log(`Catalog List Includes ${collection.length} Albums:`);
     console.log('');
     for(let i=0; i<collection.length; i++){
-        console.log(`⦿ ${collection[i].title} by ${collection[i].artist}, published in ${collection[i].yearPublished}`);
+        console.log(`⦿ ${collection[i].title} by ${collection[i].artist}, published in ${collection[i].yearPublished}:`);
     }   //  end for loop
     mainMenu();
     return '';
 }   //  end showCollectionAlbums function
 
 //----------------------------------------------------------------------------------//
+//          Function to show a list of albums with tracks                           //
+//----------------------------------------------------------------------------------//
 
 function showCollectionTracks(collection){
     console.log(`Catalog List Includes ${collection.length} Albums:`);
     for(let i=0; i<collection.length; i++){
         console.log('');
-        console.log(`⦿ ${collection[i].title} by ${collection[i].artist}, published in ${collection[i].yearPublished}`);
+        console.log(`⦿ ${collection[i].title} by ${collection[i].artist}, published in ${collection[i].yearPublished}:`);
         for(let j=0; j<collection[i].tracks.length; j++){
             console.log(`   ${j+1}. ${collection[i].tracks[j].track}: ${collection[i].tracks[j].duration}`);
         }   //  end for loop
@@ -206,4 +227,23 @@ function showCollectionTracks(collection){
     return '';
 }   //  end showCollectionTracks function
 
-//--------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------//
+//          Function to post fancy program name                                     //
+//----------------------------------------------------------------------------------//
+
+function fancyName(){   //  Totally used an ASCII art generator for this -> https://patorjk.com/software/taag/
+    console.log(' ██████╗ █████╗ ████████╗ █████╗ ██╗      ██████╗  ██████╗           ');
+    console.log('██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║     ██╔═══██╗██╔════╝           ');
+    console.log('██║     ███████║   ██║   ███████║██║     ██║   ██║██║  ███╗          ');
+    console.log('██║     ██╔══██║   ██║   ██╔══██║██║     ██║   ██║██║   ██║          ');
+    console.log('╚██████╗██║  ██║   ██║   ██║  ██║███████╗╚██████╔╝╚██████╔╝          ');
+    console.log(' ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝           ');
+    console.log('                                                                     ');
+    console.log(' ██████╗ ███████╗███╗   ██╗██╗██╗   ██╗███████╗    ███████╗  ██████╗ ');
+    console.log('██╔════╝ ██╔════╝████╗  ██║██║██║   ██║██╔════╝    ╚════██║ ██╔═████╗');
+    console.log('██║  ███╗█████╗  ██╔██╗ ██║██║██║   ██║███████╗        ██╔╝ ██║██╔██║');
+    console.log('██║   ██║██╔══╝  ██║╚██╗██║██║██║   ██║╚════██║       ██╔╝  ████╔╝██║');
+    console.log('╚██████╔╝███████╗██║ ╚████║██║╚██████╔╝███████║       ██║██╗╚██████╔╝');
+    console.log(' ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚══════╝       ╚═╝╚═╝ ╚═════╝ ');
+    return;
+}
