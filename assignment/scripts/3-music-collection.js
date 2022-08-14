@@ -13,13 +13,14 @@ let track;
 let duration;
 let counter = 1;
 let numTracks;
+let albumInputs = {};
 
 ////////////////////////////////////////////////////////////////////////////////////
 //          Required Functions                                                    //
 ////////////////////////////////////////////////////////////////////////////////////
 
 function addToCollection(title, artist, yearPublished, tracks){
-    let albumInputs = {
+    albumInputs = {
         title: title,
         artist: artist,
         yearPublished: yearPublished,
@@ -145,7 +146,7 @@ function mainMenu(){
     }   //  end else if for showing list
     else if(answer === 'album tracks'){   //  shows a numbered list of all albums in the collection   --  WORKS
         console.log(' ');
-        showCollectionTracks(collection, tracks);
+        showCollectionTracks(collection, albumInputs, tracks);
     }   //  end else if for showing list
     else if(answer === 'end'){  //  terminates the program                                      --  WORKS
         console.log(' ');
@@ -164,18 +165,20 @@ function mainMenu(){
 //----------------------------------------------------------------------------------//
 
 function addToCollectionAlbums(title, artist, yearPublished, tracks){
-    let albumInputs = {                                                             //  all of the prompt inputs together create a new album added to the collection        --  WORKS
+    albumInputs = {                                                             //  all of the prompt inputs together create a new album added to the collection        --  WORKS
         title: prompt('\nPlease Enter Album Title:\n'),
         artist: prompt('\nPlease Enter Album Artist:\n'),
-        yearPublished: prompt('\nPlease Enter Album Year Published:\n'),
+        yearPublished: parseInt(prompt('\nPlease Enter Album Year Published:\n'), 10),
         tracks: trackInsert()
     }   //  end albumInputs Object Literal
     console.log('New entry added to catalog:');                                     //  console log of the new album added to the collection
     console.log(`Album: ${albumInputs.title}\nArtist: ${albumInputs.artist}\nYear Published: ${albumInputs.yearPublished}\nNumber of Tracks: ${numTracks}`);
-    console.log(`${albumInputs.tracks}`);
-    collection.push(albumInputs);                                                   //  actually adds the album to the collection               --  WORKS
+    console.log(`${albumInputs.tracks.track} and ${albumInputs.tracks.duration}`);
+    collection.push(albumInputs); 
+    console.log(albumInputs);
+    console.log(collection);                                                  //  actually adds the album to the collection               --  WORKS
     mainMenu();
-    return albumInputs;
+    return collection;
 }   //  end addToCollection function
 
 ////////////////////////////////////  ----    WORK ZONE   ----    ////////////////////////////////////
@@ -183,8 +186,11 @@ function trackInsert(){
     numTracks = prompt('\nHow many tracks does this album have?\n')
     tracks = [];
     for(let i=0; i<numTracks; i++){
-        tracks.push([{track: prompt(`Please Enter Track ${i+1} Name:\n`), duration: prompt(`Please Enter Track ${i+1} Duration:\n`)}]);
+        tracks.push({track: prompt(`Please Enter Track ${i+1} Name:\n`), duration: prompt(`Please Enter Track ${i+1} Duration:\n`)});
     }   //  end for loop
+    for(let i=0; i<numTracks; i++){
+        console.log(tracks[i]);
+    }
     console.log(tracks) //  currently writing:  [object Object],[object Object] 
     return tracks;
 }   //  end of trackInsert funcion
@@ -214,7 +220,7 @@ function showCollectionAlbums(collection){
 //          Function to show a list of albums with tracks                           //
 //----------------------------------------------------------------------------------//
 
-function showCollectionTracks(collection){
+function showCollectionTracks(collection, tracks){
     console.log(`Catalog List Includes ${collection.length} Albums:`);
     for(let i=0; i<collection.length; i++){
         console.log('');
