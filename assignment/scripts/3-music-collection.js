@@ -16,8 +16,15 @@ let numTracks;
 let albumInputs = {};
 
 ////////////////////////////////////////////////////////////////////////////////////
-//          Required Functions                                                    //
+//      REQUIRED FUNCTIONS
 ////////////////////////////////////////////////////////////////////////////////////
+
+//--------------------------------------------------------------------------------//
+//  ADD TO COLLECTION function
+//
+//      Creates a catalog of albums with title, artist, year published, and tracks
+//      consisting of track names and durations.
+//--------------------------------------------------------------------------------//
 
 function addToCollection(title, artist, yearPublished, tracks){
     albumInputs = {
@@ -31,9 +38,12 @@ function addToCollection(title, artist, yearPublished, tracks){
 }   //  end addToCollection function
 
 //--------------------------------------------------------------------------------//
+//  SHOW COLLECTION function
+//
+//      Prints out a list of all albums added to the catalog in bullet form.
+//--------------------------------------------------------------------------------//
 
 function showCollection(array){
-    //  Produces a list of the album inputs created in addToCollection function
     console.log('');
     console.log(`Catalog List Includes ${array.length} Data Set(s):`);
     for(let i=0; i<array.length; i++){
@@ -43,8 +53,12 @@ function showCollection(array){
 }   //  end showCollection function
 
 //--------------------------------------------------------------------------------//
+//  FIND BY ARTIST function
+//
+//      Searches the catalog for a specified artist and returns all matching arrays.
+//--------------------------------------------------------------------------------//
 
-function findByArtist(artist){  //  Searches for data sets by artist
+function findByArtist(artist){
     let byArtist = [];
     console.log(`Catalog Sets by ${artist}:`)
     for(let i=0; i<collection.length; i++){
@@ -57,7 +71,7 @@ function findByArtist(artist){  //  Searches for data sets by artist
 }   //  end findByArtist function
 
 ////////////////////////////////////////////////////////////////////////////////////
-//          Main Code                                                             //
+//      MAIN CODE
 ////////////////////////////////////////////////////////////////////////////////////
 
 //  Adds data sets to the collection
@@ -73,7 +87,7 @@ console.log(collection);
 //  Shows a listing of all data sets in the collection
 console.log(showCollection(collection));
 
-//  Shows a listing of all data sets by given artist
+//  Searches for given artist and returns associated arrays
 console.log(findByArtist('The Beatles'));
 console.log(findByArtist('Phish'));
 
@@ -149,10 +163,6 @@ function mainMenu(){
         console.log(' ');
         showCollectionTracks(collection, albumInputs, tracks);
     }   //  end else if for showing list
-    else if(answer === 'search'){
-        console.log('');
-        search();
-    }   //  end if
     else if(answer === 'end'){  //  terminates the program                                      --  WORKS
         console.log(' ');
         console.log('*** Thank you for using ***');
@@ -209,7 +219,10 @@ function trackInsert(){
 }   //  end of trackInsert funcion
 
 //----------------------------------------------------------------------------------//
-//          Function to show a list of albums                                       //
+//  SHOW COLLECTION ALBUMS function
+//
+//      This function tells you how many albums are in the catalog and then gives a
+//      print out of all the albums in psuedo bullet form. Shot back to main menu after.
 //----------------------------------------------------------------------------------//
 
 function showCollectionAlbums(collection){
@@ -224,7 +237,13 @@ function showCollectionAlbums(collection){
 }   //  end showCollectionAlbums function
 
 //----------------------------------------------------------------------------------//
-//          Function to show a list of albums with tracks                           //
+//  SHOW COLLECTION TRACKS function
+//
+//      This is basically the same as the previous function except it's so much more
+//      amazingness and has a double for loop. The first loop identifies the album
+//      and prints it in bullet form. The second loop dives inside that album to the
+//      track info and prints each track and duration in a sequential number form.
+//      Afterwards you get spit out into the main menu again.
 //----------------------------------------------------------------------------------//
 
 function showCollectionTracks(collection, tracks){
@@ -241,10 +260,14 @@ function showCollectionTracks(collection, tracks){
 }   //  end showCollectionTracks function
 
 //----------------------------------------------------------------------------------//
-//          Function to post fancy program name                                     //
+//  FANCY NAME function
+//
+//      Just being silly and naming my "program" once the user travels to the stretch
+//      goals area of the code through prompts. Totally used an ASCII art convertor
+//      to accomplish this.  Credit --->  https://patorjk.com/software/taag/
 //----------------------------------------------------------------------------------//
 
-function fancyName(){   //  Totally used an ASCII art generator for this -> https://patorjk.com/software/taag/
+function fancyName(){
     console.log(' ██████╗ █████╗ ████████╗ █████╗ ██╗      ██████╗  ██████╗           ');
     console.log('██╔════╝██╔══██╗╚══██╔══╝██╔══██╗██║     ██╔═══██╗██╔════╝           ');
     console.log('██║     ███████║   ██║   ███████║██║     ██║   ██║██║  ███╗          ');
@@ -260,3 +283,8 @@ function fancyName(){   //  Totally used an ASCII art generator for this -> http
     console.log(' ╚══╝╚══╝ ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝        ╚═╝╚═╝ ╚═════╝   ');
     return;
 }
+
+//      NOTE:   I did not make a search function for the stretch goals. Just had too much 
+//              fun figuring out the add album and tracks function.
+
+//                          THE END
