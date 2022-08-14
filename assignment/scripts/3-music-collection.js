@@ -50,7 +50,6 @@ function findByArtist(artist){  //  Searches for data sets by artist
     for(let i=0; i<collection.length; i++){
         if(artist === collection[i].artist){
             byArtist.push(collection[i]);
-            //console.log(`${counter}. ${collection[i].title} by ${collection[i].artist}, published in ${collection[i].yearPublished}`);
             counter ++;
         }   //  end if
     }   //  end for loop
@@ -86,35 +85,25 @@ yourChoice();
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 //                                                                                //
-//          Stretch Goals                                                         //
-//                                                                                //
-////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////
-
-function search(){
-
-}   //  end search function
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////
-//                                                                                //
-//          Extra Special Functions                                               //
+//          Extra Special Functions     ⦿       Putting the FUN in FUNction       //
 //                                                                                //
 ////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
 //----------------------------------------------------------------------------------//
-//          Function to focus on required functions or stretch goals/extras         //
+//  YOUR CHOICE function
+//
+//      This function works as a bridge between the required functions and the extra
+//      stuff or stretch goals. A prompt lists [stretch] and [end].
+//          ⦿   [stretch] takes you to the main menu for all the extra fun
+//          ⦿   [end] terminates the program
 //----------------------------------------------------------------------------------//
 
 function yourChoice(){
-    let choice = prompt(`Catalog Genius 7.0\n\nPlease Choose Program Path:\n------------------------------\n[ end ] - For Required Features\n[ stretch ] - For Stretch Goals + Some`);
+    let choice = prompt(`Catalog Wizard 7.0\n\nPlease Choose Program Path:\n------------------------------\n[ end ] - For Required Features\n[ stretch ] - For Stretch Goals + Some`);
     if(choice === 'end'){
         console.log(' ');
-        console.log('*** Thank you for using Catalog Genius 7.0 ***');
+        console.log('*** Thank you for using Catalog Wizard 7.0 ***');
         return '';
     }   //  end if - redirects to the basics
     else if(choice === 'stretch'){
@@ -129,15 +118,27 @@ function yourChoice(){
 }   //  end yourChoice function
 
 //----------------------------------------------------------------------------------//
-//          Function to serve as main menu for selecting other functions            //
+//  MAIN MENU function          
+//
+//      This function works as a main menu.  A prompt lists [add album], [album list],
+//      [album tracks], [search], and [end].
+//      Each input takes you to a different funtion tree.
+//          ⦿   [add album] allows you to add an additional album with multiple tracks
+//              that will also appear in the lists created by the other function options
+//          ⦿   [album list] tells you how many albums are in the catalog and prints
+//              them out
+//          ⦿   [album tracks] prints out albums with numbered tracks
+//          ⦿   [search] allows you to search the catalog by Title, Artist, Track Name
+//              or Year Published
+//          ⦿   [end] terminates the program
 //----------------------------------------------------------------------------------//
 
 function mainMenu(){
     //  The main menu is where you can add data, search for data, or end the program
-    let answer = prompt(`Catalog Genius 7.0\nInput For Desired Function:\n----------------------------\n[ add album ] - To add a new album.\n[ album list ] - To show a list of albums.\n[ album tracks ] - To show a list of albums with tracks.\n[ end ] - To close catalog program.`);
+    let answer = prompt(`Catalog Wizard 7.0\nInput For Desired Function:\n----------------------------\n[ add album ] - To add a new album.\n[ album list ] - To show a list of albums.\n[ album tracks ] - To show a list of albums with tracks.\n[ end ] - To close catalog program.`);
     if(answer === 'add album'){  //  lets you add a new album (title, artist, yearPublished)     --  WORKS
         console.log(' ');
-        console.log(addToCollectionAlbums(title, artist, yearPublished));
+        console.log(addToCollectionAlbums(title, artist, yearPublished));   //  
         return '';
     }   //  end if for adding to the catalog
     else if(answer === 'album list'){   //  shows a numbered list of all albums in the collection   --  WORKS
@@ -148,6 +149,10 @@ function mainMenu(){
         console.log(' ');
         showCollectionTracks(collection, albumInputs, tracks);
     }   //  end else if for showing list
+    else if(answer === 'search'){
+        console.log('');
+        search();
+    }   //  end if
     else if(answer === 'end'){  //  terminates the program                                      --  WORKS
         console.log(' ');
         console.log('*** Thank you for using ***');
@@ -161,45 +166,47 @@ function mainMenu(){
 }   //  end startingPrompt function
 
 //----------------------------------------------------------------------------------//
-//          Function to add albums                                                  //
+//  ADD TO COLLECTION ALBUMS function
+//
+//      Basically does what it says.  This main menu prompt choice will ask for an
+//      album name, artist name and year published input. After the year published
+//      prompt, you will be directed to the trackInsert function to add tracks before
+//      automatically coming back here and pushing all the new info to the collection
+//      and then putting you back to the main menu.
 //----------------------------------------------------------------------------------//
 
 function addToCollectionAlbums(title, artist, yearPublished, tracks){
-    albumInputs = {                                                             //  all of the prompt inputs together create a new album added to the collection        --  WORKS
+    albumInputs = {
         title: prompt('\nPlease Enter Album Title:\n'),
         artist: prompt('\nPlease Enter Album Artist:\n'),
         yearPublished: parseInt(prompt('\nPlease Enter Album Year Published:\n'), 10),
         tracks: trackInsert()
     }   //  end albumInputs Object Literal
-    console.log('New entry added to catalog:');                                     //  console log of the new album added to the collection
+    console.log('New entry added to catalog:');
     console.log(`Album: ${albumInputs.title}\nArtist: ${albumInputs.artist}\nYear Published: ${albumInputs.yearPublished}\nNumber of Tracks: ${numTracks}`);
-    console.log(`${albumInputs.tracks.track} and ${albumInputs.tracks.duration}`);
-    collection.push(albumInputs); 
-    console.log(albumInputs);
-    console.log(collection);                                                  //  actually adds the album to the collection               --  WORKS
+    collection.push(albumInputs);
     mainMenu();
-    return collection;
+    return '';
 }   //  end addToCollection function
 
-////////////////////////////////////  ----    WORK ZONE   ----    ////////////////////////////////////
+//----------------------------------------------------------------------------------//
+//  TRACK INSERT function
+//
+//      This prompts the user for the number of tracks you want to add to the new
+//      album. Next, you are looped to match the number of tracks input and asked for
+//      the track name and duration of each track. Each itteration, the new track and
+//      duration are pushed to the tracks array. Last you head back to the previous
+//      function to combine all the goodness.
+//----------------------------------------------------------------------------------//
+
 function trackInsert(){   
     numTracks = prompt('\nHow many tracks does this album have?\n')
     tracks = [];
     for(let i=0; i<numTracks; i++){
         tracks.push({track: prompt(`Please Enter Track ${i+1} Name:\n`), duration: prompt(`Please Enter Track ${i+1} Duration:\n`)});
     }   //  end for loop
-    for(let i=0; i<numTracks; i++){
-        console.log(tracks[i]);
-    }
-    console.log(tracks) //  currently writing:  [object Object],[object Object] 
     return tracks;
 }   //  end of trackInsert funcion
-
-//  When I run my Album + Track list function I shows the newly added album with correct # of tracks, but tracks show 
-//  as undefined: undefined versus the wanted 'track': 'duration'  ..  getting there though.. 
-
-////////////////////////////////////  ----    WORK ZONE   ----    ////////////////////////////////////  [{track: 'Box of Rain', duration: '5:19'},
-
 
 //----------------------------------------------------------------------------------//
 //          Function to show a list of albums                                       //
@@ -245,11 +252,11 @@ function fancyName(){   //  Totally used an ASCII art generator for this -> http
     console.log('╚██████╗██║  ██║   ██║   ██║  ██║███████╗╚██████╔╝╚██████╔╝          ');
     console.log(' ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚══════╝ ╚═════╝  ╚═════╝           ');
     console.log('                                                                     ');
-    console.log(' ██████╗ ███████╗███╗   ██╗██╗██╗   ██╗███████╗    ███████╗  ██████╗ ');
-    console.log('██╔════╝ ██╔════╝████╗  ██║██║██║   ██║██╔════╝    ╚════██║ ██╔═████╗');
-    console.log('██║  ███╗█████╗  ██╔██╗ ██║██║██║   ██║███████╗        ██╔╝ ██║██╔██║');
-    console.log('██║   ██║██╔══╝  ██║╚██╗██║██║██║   ██║╚════██║       ██╔╝  ████╔╝██║');
-    console.log('╚██████╔╝███████╗██║ ╚████║██║╚██████╔╝███████║       ██║██╗╚██████╔╝');
-    console.log(' ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝ ╚═════╝ ╚══════╝       ╚═╝╚═╝ ╚═════╝ ');
+    console.log('██╗    ██╗██╗███████╗ █████╗ ██████╗ ██████╗     ███████╗  ██████╗   ');
+    console.log('██║    ██║██║╚══███╔╝██╔══██╗██╔══██╗██╔══██╗    ╚════██║ ██╔═████╗  ');
+    console.log('██║ █╗ ██║██║  ███╔╝ ███████║██████╔╝██║  ██║        ██╔╝ ██║██╔██║  ');
+    console.log('██║███╗██║██║ ███╔╝  ██╔══██║██╔══██╗██║  ██║       ██╔╝  ████╔╝██║  ');
+    console.log('╚███╔███╔╝██║███████╗██║  ██║██║  ██║██████╔╝       ██║██╗╚██████╔╝  ');
+    console.log(' ╚══╝╚══╝ ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝        ╚═╝╚═╝ ╚═════╝   ');
     return;
 }
