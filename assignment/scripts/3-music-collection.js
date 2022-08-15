@@ -119,12 +119,12 @@ function yourChoice(){
         console.log(' ');
         console.log('*** Thank you for using Catalog Wizard 7.0 ***');
         return '';
-    }   //  end if - redirects to the basics
+    }   //  end if
     else if(choice === 'stretch'){
         console.clear();
         fancyName();
         mainMenu();
-    }   //  end else if - redirects to the extra stuff
+    }   //  end else if
     else{
         console.log('*** Invalid Entry ***');
         yourChoice();
@@ -148,31 +148,30 @@ function yourChoice(){
 //----------------------------------------------------------------------------------//
 
 function mainMenu(){
-    //  The main menu is where you can add data, search for data, or end the program
     let answer = prompt(`Catalog Wizard 7.0\nInput For Desired Function:\n----------------------------\n[ add album ] - To add a new album.\n[ album list ] - To show a list of albums.\n[ album tracks ] - To show a list of albums with tracks.\n[ end ] - To close catalog program.`);
-    if(answer === 'add album'){  //  lets you add a new album (title, artist, yearPublished)     --  WORKS
+    if(answer === 'add album'){
         console.log(' ');
-        console.log(addToCollectionAlbums(title, artist, yearPublished));   //  
+        console.log(addToCollectionAlbums(title, artist, yearPublished));
         return '';
-    }   //  end if for adding to the catalog
-    else if(answer === 'album list'){   //  shows a numbered list of all albums in the collection   --  WORKS
+    }   //  end if
+    else if(answer === 'album list'){
         console.log(' ');
         showCollectionAlbums(collection);
-    }   //  end else if for showing list
-    else if(answer === 'album tracks'){   //  shows a numbered list of all albums in the collection   --  WORKS
+    }   //  end else if
+    else if(answer === 'album tracks'){
         console.log(' ');
         showCollectionTracks(collection, albumInputs, tracks);
-    }   //  end else if for showing list
-    else if(answer === 'end'){  //  terminates the program                                      --  WORKS
+    }   //  end else if
+    else if(answer === 'end'){
         console.log(' ');
         console.log('*** Thank you for using ***');
         fancyName();
         return '';
-    }   // end else if for ending program
-    else{   //  lets you know if you entered anything other than a designated prompt            --  WORKS
+    }   // end else if
+    else{
         console.log('*** Invalid Entry ***');
         mainMenu();
-    }   //   end else for inputs not designated
+    }   //   end else
 }   //  end startingPrompt function
 
 //----------------------------------------------------------------------------------//
@@ -191,7 +190,7 @@ function addToCollectionAlbums(title, artist, yearPublished, tracks){
         artist: prompt('\nPlease Enter Album Artist:\n'),
         yearPublished: parseInt(prompt('\nPlease Enter Album Year Published:\n'), 10),
         tracks: trackInsert()
-    }   //  end albumInputs Object Literal
+    }   //  end albumInputs
     console.log('New entry added to catalog:');
     console.log(`Album: ${albumInputs.title}\nArtist: ${albumInputs.artist}\nYear Published: ${albumInputs.yearPublished}\nNumber of Tracks: ${numTracks}`);
     collection.push(albumInputs);
@@ -226,7 +225,6 @@ function trackInsert(){
 //----------------------------------------------------------------------------------//
 
 function showCollectionAlbums(collection){
-    //  I want this function to list out all album inputs from the addToCollection function
     console.log(`Catalog List Includes ${collection.length} Albums:`);
     console.log('');
     for(let i=0; i<collection.length; i++){
